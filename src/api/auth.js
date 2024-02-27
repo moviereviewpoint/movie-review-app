@@ -21,7 +21,7 @@ const uploadData = async (userData) => {
 
   try {
 
-    const response = await axios.post("/api/v1/uploadData", userData);
+    const response = await axios.post(`${backendOrigin}/api/v1/uploadData`, userData);
     // console.log("Response from server:", response.data);
     return response.data;
   } catch (error) {
