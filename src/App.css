@@ -1,38 +1,75 @@
-.App {
-  text-align: center;
-}
+/* Global styles */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* fonts  */
+@import url('https://fonts.googleapis.com/css2?family=Nosifer&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(69, 74, 84, 0.5);
   }
-  to {
-    transform: rotate(360deg);
+  
+  /* Focus styles */
+  
+  /* Root variables */
+  :root {
+    /* Colors */
+    --primaryColor: #000129;
+    --secondaryColor: white;
+    --accentColor: #00ffff; /* Aqua color used for accents */
+    --highlightColor: #ffd700; /* Gold color for highlighting elements */
+    --grayColor: gray;
+    --blackColor: black;
+    --whiteColor: white;
+    --lavenderColor: lavender;
+    --darkBlueColor: darkblue;
+    --redColor: red;
+  
+    /* Typography */
+    --primaryFontFamily: 'Poppins', sans-serif;
+    --secondaryFontFamily: 'Roboto', sans-serif;
+
+    /* linear gradient colors */
+    --primaryGradient: linear-gradient(to top,#000000, var(--primaryColor));
+   
+
+
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+  
+    /* Border */
+    --borderWidth: 1px;
+    --borderStyle: solid;
+    --borderColor: var(--primaryColor);
+    --borderRadius: 4px;
+  
+    /* Box Shadow */
+    --boxShadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+    /* Responsive breakpoints */
+    --mobileBreakpoint: 480px;
+    --tabletBreakpoint: 768px;
+    --desktopBreakpoint: 1024px;
+
+     /* temporary items */
+  --termporaryBorder: 1px solid red;
   }
-}
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .headerpadding{
+    padding-top: 80px; /* for header settings */ 
+  }

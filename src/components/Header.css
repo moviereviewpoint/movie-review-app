@@ -1,0 +1,42 @@
+@import url(../App.css);
+
+.app-header {
+  padding: 10px;
+  height: 80px;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(6, 6, 6, 0.125);
+  backdrop-filter: blur(1px);
+}
+
+.app-header-fixed {
+  padding: 10px;
+  height: 80px;
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(6, 6, 6, 0.125);
+  backdrop-filter: blur(1px);
+  animation: scrolled 0.4s linear alternate;
+}
+
+@keyframes scrolled {
+  0% {
+    top: -80px;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+.logo h1 {
+  height: auto;
+  background: url(https://picsum.photos/200);
+  font-family: var(--primaryFontFamily);
+  background-clip: text;
+  font-size: 2.7rem;
+  color: transparent;
+}

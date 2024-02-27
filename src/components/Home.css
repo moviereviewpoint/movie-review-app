@@ -1,0 +1,148 @@
+/* Add your custom styles to App.css or create a new CSS file */
+
+/* Style for the container of each movie item */
+.movie-item {
+    /* border: 1px solid #ccc; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    font-family: var(--primaryFontFamily);
+    width: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: box-shadow 0.3s ease-in-out;
+    &:hover{
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      cursor: pointer;
+    }
+  }
+    
+  section{
+    width: 70%;
+  }
+  .titleDateWarp{
+    display: flex;
+    /* align-items: start; */
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+  }
+  .movie-name{
+    margin-bottom: 10px;
+    font-weight: normal;
+  }
+  .movie-name strong{
+    font-weight: bold;
+  }
+  .movie-title {
+    margin-bottom: 8px;
+    font-weight: normal;
+  }
+  
+  /* Style for the movie image */
+  .movie-image {
+    height: calc(100vh -  75vh);
+    width: calc(100% / 4);
+    max-height: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+    /* margin-bottom: 8px; */
+  }
+  
+  /* Style for the movie description */
+  .movie-description {
+    font-size: 1em;
+  }
+  
+  /* Style for the loading message */
+  .loading-message {
+    text-align: center;
+    font-size: 1.2em;
+    margin: 16px;
+  }
+  
+  /* Style for the end message */
+  .end-message {
+    text-align: center;
+    font-size: 1.2em;
+    margin: 16px;
+    color: #888;
+  }
+  
+  /* Add more styles as needed */
+  
+
+  @media only screen and (max-width: 1300px) { 
+    .movie-item{
+      flex-direction: column;
+      width: 100%;
+      padding: 15px;
+      margin: 0;
+    }
+    /* Style for the movie image */
+  
+    section{
+      width: 100%;
+      flex-direction: column;
+    }
+    section > *{
+      margin-top: 10px;
+    }
+    .titleDateWarp{
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
+      margin-bottom: 10px;
+      font-size: 0.6rem;
+    }
+    .movie-name{
+      margin-bottom: 10px;
+      font-weight: normal;
+    }
+    .movie-name strong{
+      font-weight: bold;
+    }
+    .movie-title {
+      margin-bottom: 8px;
+      font-weight: normal;
+      font-size: 0.9rem;
+      &strong{
+        font-weight: bold;
+      }
+    }
+    
+    /* Style for the movie image */
+    .movie-image {
+      height: calc(100vh -  75vh);
+      width: 100%;
+      max-height: 100%;
+      border-radius: 4px;
+      object-fit: cover;
+      /* margin-bottom: 8px; */
+    }
+    
+    /* Style for the movie description */
+    .movie-description {
+      font-size: 0.8em;
+      text-wrap:  wrap;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    
+    /* Style for the loading message */
+    .loading-message {
+      text-align: center;
+      font-size: 1.2em;
+      margin: 16px;
+    }
+    
+    /* Style for the end message */
+    .end-message {
+      text-align: center;
+      font-size: 1.2em;
+      margin: 16px;
+      color: #888;
+    }
+}
