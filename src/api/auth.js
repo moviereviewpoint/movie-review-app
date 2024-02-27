@@ -1,8 +1,8 @@
 import axios from "axios";
-
+const backendOrigin = process.env.REACT_APP_BACKEND_ORIGIN
 const fetchData = async (page) => {
   try {
-    const apiUrl = `/api/v1/fetchData?page=${page}`;
+    const apiUrl = `${backendOrigin}/api/v1/fetchData?page=${page}`;
     // console.log("Fetching data from:", apiUrl);
 
     const response = await axios.get(apiUrl);
