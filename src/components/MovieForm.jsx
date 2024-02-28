@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import "./MovieForm.css"; // Import the CSS file for styling
 import { FaCircleNotch, FaImages } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { uploadData } from "../api/auth";
 
 const MovieForm = ({ onSubmit }) => {
@@ -17,15 +17,11 @@ const MovieForm = ({ onSubmit }) => {
   const [protectKey, setProtectKey] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setImageFile(file);
-    setSelectedImage(file);
-  };
+  const navigator = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       setLoading(true);
       setErrorMessage("please wait...");
@@ -34,16 +30,16 @@ const MovieForm = ({ onSubmit }) => {
       formData.append("description", description);
       formData.append("movieName", movieName);
       formData.append("adminKey", protectKey);
-
+  
       // Append the image file only if it exists
       if (imageFile) {
         formData.append("image", imageFile);
       }
-
-      const response = await uploadData(formData);
-
+  
+      await uploadData(formData);
+  
       // console.log(response);
-
+  
       // Reset form fields if needed
       setMovieName("");
       setMovieTitle("");
@@ -52,13 +48,16 @@ const MovieForm = ({ onSubmit }) => {
       setLoading(false);
       setSelectedImage(null);
       setErrorMessage("uploaded successfully on server ! :) ");
+      setTimeout(() => {
+        navigator('/')
+      }, 1500);
     } catch (error) {
       // console.error("Error uploading data:", error);
       // console.log(error);
       setLoading(false);
       setUploadStatusButton(true);
-
-      // Check if the error message is related to incorrect admin key
+  
+      // Check if the error message is related to an incorrect admin key
       if (
         error.response &&
         error.response.status === 400 &&
@@ -70,12 +69,27 @@ const MovieForm = ({ onSubmit }) => {
       }
     }
   };
-
+  
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSelectedImage(reader.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+      setImageFile(file);
+    } else {
+      setSelectedImage(null);
+      setImageFile(null);
+    }
+  };
+  
   return (
     <div className="register">
       <section>
         <Link className="websitehomelink" to="/">
-          filmviewpoint
+        moviereviewpoint
         </Link>
         <form onSubmit={handleSubmit}>
           <label htmlFor="adminKey">protect key:</label>
@@ -124,15 +138,15 @@ const MovieForm = ({ onSubmit }) => {
             required
           />
 
-          <label htmlFor="imageInput" className="imageInput">
+          <label htmlFor="imageInput" className="imageInput" >
             {selectedImage !== null ? (
               <img
-                src={URL.createObjectURL(selectedImage)}
-                loading="eager"
+                src={selectedImage}
+                loading="lazy"
                 alt=""
               />
             ) : (
-              <FaImages />
+              <FaImages  className="icon" />
             )}
           </label>
 
@@ -142,7 +156,7 @@ const MovieForm = ({ onSubmit }) => {
             id="imageInput"
             accept="image/*"
             onChange={handleFileChange}
-            // required
+            required
           />
           <span className="error-message">{errorMessage}</span>
           <button type="submit">

@@ -14,6 +14,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [selectedMovieIndex, setSelectedMovieIndex] = useState(null);
 
   const fetchMoreData = async () => {
     try {
@@ -41,13 +42,15 @@ const Home = () => {
     }
   };
 
-  const openMovieDetail = (movie) => {
+  const openMovieDetail = (movie, index) => {
     setSelectedMovie(movie);
+    setSelectedMovieIndex(index);
     window.scrollTo(0, 0);
   };
 
   const closeMovieDetail = () => {
     setSelectedMovie(null);
+    setSelectedMovieIndex(null);
   };
 
   useEffect(() => {
@@ -77,8 +80,8 @@ const Home = () => {
           {items.map((item, index) => (
             <div
               key={index}
-              className="movie-item"
-              onClick={() => openMovieDetail(item)}
+              className={`movie-item ${selectedMovieIndex === index ? 'activeItem' : ''}`}
+              onClick={() => openMovieDetail(item, index)}
             >
               <img
                 src={item?.imageUrl}

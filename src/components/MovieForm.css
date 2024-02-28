@@ -3,23 +3,23 @@
   width: 100%;
   height: calc(100vh - 80px);
   margin: auto;
-  padding: 30px;
+  padding: 10px;
   color: var(--primaryColor);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--primaryFontFamily);
-  background: url(../images/macwallpaper.jpg) no-repeat fixed center / cover;
+  /* background: url(../images/macwallpaper.jpg) no-repeat fixed center / cover; */
 }
 
 .register section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(5, 5, 5, 0.34); 
+  background-color: var(--lavenderColor); 
   width: 50%;
   padding: 20px; 
-  border-radius: 10px;
+  /* border-radius: 10px; */
   position: relative;
   backdrop-filter: blur(5px);
   position: relative;
@@ -30,7 +30,7 @@ section .websitehomelink{
   position: absolute;
   right: 2%;
   top: 2%;
-  color: var(--lavenderColor);
+  color: var(--primaryColor);
   cursor: pointer;
   opacity: 0.7;
 }
@@ -57,19 +57,22 @@ label {
 input, textarea {
   margin-bottom: 8px; 
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--primaryColor);
   border-radius: 5px;
   font-size: 1rem;
   outline: none;
   background-color: transparent;
   font-family: var(--primaryFontFamily);
-  color: var(--lavenderColor);
+  color: var(--primaryColor);
   max-width: 100%;
   min-width: 100%;
   max-height: 250px;
 }
 textarea {
   white-space: pre-wrap;
+}
+.imageInput .icon{
+  color: var(--primaryColor);
 }
 
 .imageInput{
@@ -85,6 +88,8 @@ textarea {
   /* background: url(../images/imageUploadImage.png) center/cover; */
   background-color: rgba(255, 255, 255, 0.274);
   border-radius: 5px;
+  border: 1px solid var(--primaryColor);
+  box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 0.167);
 }
 .imageInput > *{
   font-size: 5rem;
@@ -182,7 +187,7 @@ button:hover {
   bottom: 5%;
   right: 5%;
   padding: 10px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   background-color: var(--lavenderColor);
   border: 3px solid #007bff;
   text-transform: uppercase;
@@ -210,17 +215,16 @@ button:hover {
   align-items: center;
   justify-content: center;
   font-family: var(--primaryFontFamily);
-  background: url(../images/macwallpaper.jpg) no-repeat fixed center / cover;
 }
 
 .register section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(5, 5, 5, 0.34); 
+  background-color: var(--lavenderColor); 
   width: 100%;
   padding: 10px; 
-  border-radius: 10px;
+  /* border-radius: 10px; */
   position: relative;
   backdrop-filter: blur(5px);
   position: relative;

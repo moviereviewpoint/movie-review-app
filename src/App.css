@@ -69,7 +69,21 @@
     padding: 0;
     box-sizing: border-box;
   }
+  html{
+    -webkit-user-drag: none;
+  }
+  
+  ::selection {
+    background-color: var(--lavenderColor);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
   
   .headerpadding{
     padding-top: 80px; /* for header settings */ 
+  }
+
+  body{
+    min-height: 100vh;
   }

@@ -2,8 +2,8 @@
 
 import React from 'react';
 import './Footer.css'; // Your custom CSS file for styling
-import { FaTelegram, 
-  // FaFacebookF, FaInstagram, FaTwitter 
+import { FaTelegram, FaInstagram, 
+  // FaFacebookF,  FaTwitter 
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
@@ -13,8 +13,8 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-section">
           <h2>Contact Us</h2>
-          <p>Email: Romilkirmara7777@gmail.com</p>
-          <p>Managed  by: Romil janagal</p>
+          <p><strong>Managed by: </strong> Romil janagal</p>
+          <p><strong>Email: </strong> Romilkirmara7777@gmail.com</p>
         </div>
 
         {/* <div className="footer-section">
@@ -37,9 +37,9 @@ const Footer = () => {
             {/* <Link to="https://facebook.com" target="_blank" rel="noopener noreferrer">
               <FaFacebookF />
             </Link> */}
-            {/* <Link to="https://instagram.com/romiilll" target="_blank" rel="noopener noreferrer">
+            <Link to="https://instagram.com/romiilll" target="_blank" rel="noopener noreferrer">
               <FaInstagram />
-            </Link> */}
+            </Link>
             <Link to="https://t.me/romiilll" target="_blank" rel="noopener noreferrer">
             <FaTelegram />
             </Link>

@@ -1,8 +1,14 @@
 /* Add your custom styles to App.css or create a new CSS file */
 
+.InfiniteScrollContainer{
+  min-height: 60vh;
+}
 /* Style for the container of each movie item */
+.activeItem{
+  border: 2px solid goldenrod !important;
+}
 .movie-item {
-    /* border: 1px solid #ccc; */
+    border: 2px solid #cccccccd;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 20px auto;
@@ -79,6 +85,9 @@
       width: 100%;
       padding: 15px;
       margin: 0;
+      &:hover{
+        box-shadow: none;
+      }
     }
     /* Style for the movie image */
   
