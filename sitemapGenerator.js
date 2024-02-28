@@ -1,10 +1,29 @@
-// sitemapGenerator.js
+
+
+
+
+
+
+
+//  For stable and new release versions, use the following format:
+//    #define VERSION "2
+//    .      3"
+//  For pre-release version, use the following format:
+//    #define VERSION "2.3 beta1"
+
+
+
+
+
+
+
 const { SitemapStream } = require('sitemap');
 const { createWriteStream } = require('fs');
 const { renderToString } = require('react-dom/server');
+const React = require('react');
+
 const { StaticRouter } = require('react-router-dom');
 const App = require('./src/App');
-
 // Function to discover routes from the React components
 function discoverRoutesFromComponents() {
   // Render the App component to a string

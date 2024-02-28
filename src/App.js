@@ -12,6 +12,11 @@ function App() {
   const [enableCustomScroll, setEnableCustomScroll] = useState(true);
 
   useEffect(() => {
+    window.addEventListener("DOMContentLoaded", () => {
+    setLoading(false);
+  });
+  }, [])
+  useEffect(() => {
     const handleScroll = (event) => {
       if (enableCustomScroll) {
         event.preventDefault();
@@ -23,9 +28,6 @@ function App() {
 
     window.addEventListener("wheel", handleScroll, { passive: false });
 
-    window.addEventListener("DOMContentLoaded", () => {
-      setLoading(false);
-    });
 
     return () => {
       window.removeEventListener("wheel", handleScroll);
