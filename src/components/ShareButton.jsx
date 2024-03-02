@@ -19,7 +19,7 @@ const ShareButton = React.forwardRef(({ itemId, showShareDialog }, ref) => {
 
   const [showSharePage, setShowSharePage] = useState(false);
 
-  const url = `http://localhost:3000/post/${itemId}`;
+  const url = `https://moviereviewpoint.com/post/${itemId}`;
 
   const handleShareButtonClick = () => {
     setShowSharePage(true);
