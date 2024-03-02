@@ -31,4 +31,32 @@ const uploadData = async (userData) => {
 };
 
 
-export { fetchData, uploadData };
+const getPostById = async (postId) => {
+  try {
+    const apiUrl = `${backendOrigin}/api/v1/getPostById/${postId}`;
+    const response = await axios.get(apiUrl);
+    return response;
+  } catch (error) {
+    console.error("Error fetching post by ID:", error);
+    throw error;
+  }
+};
+
+const deletePost = async (postId, adminKey) => {
+  console.log(adminKey)
+
+  try {
+    const response = await axios.delete(`${backendOrigin}/api/v1/delete/${postId}`, {
+      headers: {
+        Authorization: adminKey, 
+      },
+    });
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+export { fetchData, uploadData, getPostById, deletePost };

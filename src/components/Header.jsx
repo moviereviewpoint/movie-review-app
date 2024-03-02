@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <header className={`app-header ${headerClass}`}>
       <div className="logo">
-        <h1>moviereviewpoint</h1>
+        <h1 onClick={()=>{ window.location.href = "/"}}>moviereviewpoint</h1>
       </div>
     </header>
   );

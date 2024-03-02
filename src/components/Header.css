@@ -5,7 +5,8 @@
   height: 80px;
   width: 100%;
   text-align: center;
-  background-color: rgba(6, 6, 6, 0.125);
+  /* background-color: rgba(6, 6, 6, 0.125); */
+  background-color: #20232a;
   backdrop-filter: blur(1px);
 }
 
@@ -17,7 +18,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(6, 6, 6, 0.125);
+  /* background-color: rgba(6, 6, 6, 0.125); */
+  background-color: #20232a77;
   backdrop-filter: blur(1px);
   animation: scrolled 0.4s linear alternate;
 }
@@ -39,6 +41,7 @@
   background-clip: text;
   font-size: 2.5rem;
   color: transparent;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 1300px) { 

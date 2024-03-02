@@ -1,35 +1,80 @@
-import React from "react";
-import { formatTimestamp } from "../utils/formatTimestamp";
-import "./MovieDetail.css";
+import React, { useEffect, useState } from 'react';
+import { formatTimestamp } from '../utils/formatTimestamp';
+import { getPostById } from '../api/auth';
+import { useParams } from 'react-router-dom';
+
+import './MovieDetail.css'; // Import the MovieDetail styles
+import Home from './Home';
+import { useLoading } from './context/LoadingContext';
+import ShareButton from './ShareButton';
+
+function MovieDetail({ onClose }) {
+  const [postDetails, setPostDetails] = useState(null);
+  const [showShareDialog, setShowShareDialog] = useState(false);
+  const [error, setError] = useState(null);
+const  {setProgress} = useLoading();
+  const { postId } = useParams();
 
 
-
-const MovieDetail = ({ movie, onClose }) => {
+  useEffect(() => {
+    const fetchPostDetails = async () => {
+      try {
+        setProgress(50); 
+        const response = await getPostById(postId);
+        const details = response?.data;
+        setPostDetails(details);
+      } catch (error) {
+        console.error("Error fetching post details:", error);
+        setError("Error fetching post details. Please try again.");
+      } finally {
+        setProgress(100); 
+      }
+    };
+  
+    fetchPostDetails();
+  }, [postId]);
+  
+const handleShareClick = () => {
+  setShowShareDialog(true)
+}
   return (
-    <div className="movie-detail-overlay" onClick={onClose}>
-      <div className="movie-detail-container" onClick={(e) => e.stopPropagation()}>
-        <img
-          src={movie?.imageUrl}
-          loading="lazy"
-          alt={`Poster for ${movie.title}`}
-          className="movie-detail-image"
-        />
-        <div className="movie-detail-content">
-          <div className="titleDateWarp">
-            <h2 className="movie-detail-name">
-              <strong>Movie Name: </strong> {movie.moviesName}
-            </h2>
-            <p>{formatTimestamp(movie?.createdAt)}</p>
-          </div>
+    <>
+      {postDetails ? (
+        <div className="movie-detail-overlay" onClick={onClose}>
+          
+          <div className="movie-detail-container" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={postDetails.imageUrl || "fallbackImageUrl"}
+              loading="lazy"
+              alt={`Poster for ${postDetails.title}`}
+              className="movie-detail-image"
+            />
+            <div className="movie-detail-content">
+              <div className="wrap">
+                <h2 className="movie-detail-name">
+                  <strong>Movie Name: </strong> {postDetails.moviesName || ''}
+                </h2>
+                <p>{formatTimestamp(postDetails.createdAt) || ''}</p>
+              </div>
 
-          <h3 className="movie-detail-title">
-            <strong>Title: </strong> {movie.title}
-          </h3>
-          <p className="movie-detail-description">{movie.description}</p>
+            <div className="wrap">
+              <h3 className="movie-detail-title">
+                <strong>Title: </strong> {postDetails.title || ''}
+              </h3>
+              <ShareButton 
+                        itemId={postDetails._id}
+                        showShareDialog={showShareDialog}
+                        onClick={handleShareClick}
+                      />
+              </div>
+              <p className="movie-detail-description">{postDetails.description || ''}</p>
+            </div>
+          </div>
+          {postId && <Home />}
         </div>
-      </div>
-    </div>
+      ) : <p>{error}</p>}
+    </>
   );
-};
+}
 
 export default MovieDetail;

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { fetchData } from "../api/auth";
+import { deletePost, fetchData } from "../api/auth";
 import "./Home.css";
 import { formatTimestamp } from "../utils/formatTimestamp";
 import AdComponent from "./AdComponent";
 import MovieDetail from "./MovieDetail";
-
+import { FaTrashCan } from "react-icons/fa6";
+import { useNavigate, useParams } from "react-router-dom";
+import ShareButton from "./ShareButton";
 
 const Home = () => {
   const [items, setItems] = useState([]);
@@ -13,8 +15,16 @@ const Home = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [selectedMovie, setSelectedMovie] = useState(null);
   const [selectedMovieIndex, setSelectedMovieIndex] = useState(null);
+  const [showDeleteButton, setShowDeleteButton] = useState(false);
+  const [selectedMovieId, setSelectedMovieId] = useState("");
+  const [showShareDialog, setShowShareDialog] = useState(false);
+
+  const { postId } = useParams();
+  const { deletepost } = useParams();
+  const navigator = useNavigate();
+
+  const shareButtonRef = useRef();
 
   const fetchMoreData = async () => {
     try {
@@ -35,6 +45,7 @@ const Home = () => {
       }
     } catch (error) {
       // console.error("Error fetching data:", error);
+
       setError("Error fetching data. Please try again.");
       setHasMore(false);
     } finally {
@@ -42,15 +53,46 @@ const Home = () => {
     }
   };
 
-  const openMovieDetail = (movie, index) => {
-    setSelectedMovie(movie);
-    setSelectedMovieIndex(index);
-    window.scrollTo(0, 0);
+  const openMovieDetail = (item, index) => {
+    if (!deletepost && !shareButtonRef.current?.isClicked()) {
+      navigator(`/post/${item._id}`);
+      setSelectedMovieIndex(index);
+      window.scrollTo(0, 0);
+      setShowShareDialog(false);
+    } else {
+      setShowShareDialog(true);
+    }
   };
 
+  // useEffect(() => {
+  //   if (selectedMovieId) {
+  //     navigator(`/post/${selectedMovieId}`);
+  //   }
+  // }, [selectedMovieId]);
+
   const closeMovieDetail = () => {
-    setSelectedMovie(null);
+    setSelectedMovieId(null);
     setSelectedMovieIndex(null);
+  };
+
+  let count = 0;
+  const handleDeleteClick = async (postId) => {
+    console.log(postId);
+    count++;
+    const secureKey = count === 1 && prompt("Enter the secure key:");
+
+    if (!secureKey) {
+      count--;
+      return;
+    }
+    const response = await deletePost(postId, secureKey);
+    if (response.status === 200) {
+      setItems((prevItems) => prevItems.filter((item) => item._id !== postId));
+      console.log("Post deleted successfully");
+    } else {
+      console.log("Error deleting post");
+      count--;
+    }
   };
 
   useEffect(() => {
@@ -72,16 +114,23 @@ const Home = () => {
         }
       >
         <div className="InfiniteScrollContainer">
-          <AdComponent adSlot={process.env.REACT_APP_ADS_SLOT}/>
+          <AdComponent adSlot={process.env.REACT_APP_ADS_SLOT} />
 
-          {selectedMovie && (
-            <MovieDetail movie={selectedMovie} onClose={closeMovieDetail} />
+          {selectedMovieId && (
+            <MovieDetail
+              /* movieId={selectedMovieId}  */ onClose={closeMovieDetail}
+            />
           )}
+
           {items.map((item, index) => (
             <div
               key={index}
-              className={`movie-item ${selectedMovieIndex === index ? 'activeItem' : ''}`}
-              onClick={() => openMovieDetail(item, index)}
+              className={`movie-item ${
+                selectedMovieIndex === index ? "activeItem" : ""
+              }`}
+              onClick={() => {
+                !deletepost && openMovieDetail(item, index);
+              }}
             >
               <img
                 src={item?.imageUrl}
@@ -90,16 +139,33 @@ const Home = () => {
                 className="movie-image"
               />
               <section>
-                <div className="titleDateWarp">
+                <div className="Warp">
                   <h2 className="movie-name">
                     <strong>Movie Name : </strong> {item.moviesName}
                   </h2>
                   <p>{formatTimestamp(item?.createdAt)}</p>
                 </div>
 
-                <h3 className="movie-title">
-                  <strong>Title:</strong> {item.title}
-                </h3>
+                <div className="Warp">
+                  <h3 className="movie-title">
+                    <strong>Title:</strong> {item.title}
+                  </h3>
+                  {deletepost ? (
+                    <FaTrashCan
+                      className="delete-icon"
+                      size={20}
+                      onClick={() => handleDeleteClick(item._id)}
+                    />
+                  ) : (
+                    postId && (
+                      <ShareButton
+                        ref={shareButtonRef}
+                        itemId={item._id}
+                        showShareDialog={showShareDialog}
+                      />
+                    )
+                  )}
+                </div>
                 <p className="movie-description">
                   {item.description?.length > 200
                     ? `${item.description.substring(0, 200)}...`

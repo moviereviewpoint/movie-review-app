@@ -27,12 +27,22 @@
   section{
     width: 70%;
   }
-  .titleDateWarp{
+  .Warp{
     display: flex;
     /* align-items: start; */
     justify-content: space-between;
     margin-bottom: 10px;
     font-size: 0.8rem;
+  }
+  .delete-icon{
+    transition: all 0.20s ease-in-out;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    color: rgba(170, 6, 6, 0.859);
+    &:hover{
+      color: red;
+      cursor: pointer;
+      transform: scale(1.2);
+    }
   }
   .movie-name{
     margin-bottom: 10px;
