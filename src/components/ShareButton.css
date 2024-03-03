@@ -1,5 +1,6 @@
 
 @import url(../App.css);
+
 .sharepagewarp{
     position: fixed;
     width: 100%;
@@ -106,3 +107,19 @@
       transform: scale(1.2);
     }
   }
+
+@media only screen and (max-width: 1300px) { 
+.sharepage{
+    position: relative;
+    width: 90%;
+    height: 200px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 5px;
+}
+}

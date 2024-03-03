@@ -108,17 +108,24 @@
     section > *{
       margin-top: 10px;
     }
-    .titleDateWarp{
+    .Warp{
       display: flex;
-      align-items: flex-start;
-      justify-content: center;
+      align-items: flex-end;
+  justify-content: space-between;
       flex-direction: column;
       margin-bottom: 10px;
       font-size: 0.6rem;
+      width: 100%;
+    }
+    .Warp .share-icon{
+      width: 100%;
+      display: block;
     }
     .movie-name{
       margin-bottom: 10px;
       font-weight: normal;
+      font-size: 0.9rem;
+      width: 100%;
     }
     .movie-name strong{
       font-weight: bold;
@@ -126,20 +133,19 @@
     .movie-title {
       margin-bottom: 8px;
       font-weight: normal;
-      font-size: 0.9rem;
+      font-size: 0.89rem;
+      width: 100%;
       &strong{
         font-weight: bold;
       }
     }
     
-    /* Style for the movie image */
     .movie-image {
       height: calc(100vh -  75vh);
       width: 100%;
       max-height: 100%;
       border-radius: 4px;
       object-fit: cover;
-      /* margin-bottom: 8px; */
     }
     
     /* Style for the movie description */

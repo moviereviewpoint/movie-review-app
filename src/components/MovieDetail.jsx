@@ -7,6 +7,7 @@ import './MovieDetail.css'; // Import the MovieDetail styles
 import Home from './Home';
 import { useLoading } from './context/LoadingContext';
 import ShareButton from './ShareButton';
+import oneErrorImage from "../images/OneErrorImage.png"
 
 function MovieDetail({ onClose }) {
   const [postDetails, setPostDetails] = useState(null);
@@ -37,6 +38,10 @@ const  {setProgress} = useLoading();
 const handleShareClick = () => {
   setShowShareDialog(true)
 }
+const handleImageError = (event) => {
+  event.target.src = oneErrorImage;
+  event.target.alt = 'Default Poster'}
+
   return (
     <>
       {postDetails ? (
@@ -44,11 +49,13 @@ const handleShareClick = () => {
           
           <div className="movie-detail-container" onClick={(e) => e.stopPropagation()}>
             <img
-              src={postDetails.imageUrl || "fallbackImageUrl"}
+              src={postDetails.imageUrl}
               loading="lazy"
               alt={`Poster for ${postDetails.title}`}
               className="movie-detail-image"
+              onError={handleImageError}
             />
+            <hr style={{marginBottom: "10px"}}/>
             <div className="movie-detail-content">
               <div className="wrap">
                 <h2 className="movie-detail-name">

@@ -8,6 +8,7 @@ import MovieDetail from "./MovieDetail";
 import { FaTrashCan } from "react-icons/fa6";
 import { useNavigate, useParams } from "react-router-dom";
 import ShareButton from "./ShareButton";
+import oneErrorImage from "../images/OneErrorImage.png"
 
 const Home = () => {
   const [items, setItems] = useState([]);
@@ -100,6 +101,10 @@ const Home = () => {
     fetchMoreData();
   }, []);
 
+  const handleImageError = (event) => {
+    event.target.src = oneErrorImage;
+    event.target.alt = 'Default Poster'}
+
   return (
     <>
       <InfiniteScroll
@@ -137,6 +142,7 @@ const Home = () => {
                 loading="lazy"
                 alt={`Poster for ${item.title}`}
                 className="movie-image"
+                onError={handleImageError}
               />
               <section>
                 <div className="Warp">
@@ -159,6 +165,7 @@ const Home = () => {
                   ) : (
                     postId && (
                       <ShareButton
+                      className="share-icon"
                         ref={shareButtonRef}
                         itemId={item._id}
                         showShareDialog={showShareDialog}

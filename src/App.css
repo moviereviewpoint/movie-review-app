@@ -8,11 +8,11 @@
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
-    background-color: transparent;
+    background-color: #00012923;
   }
   
   ::-webkit-scrollbar-thumb {
-    background-color: rgba(69, 74, 84, 0.5);
+    background-color: #20232a78;
   }
   
   /* Focus styles */
